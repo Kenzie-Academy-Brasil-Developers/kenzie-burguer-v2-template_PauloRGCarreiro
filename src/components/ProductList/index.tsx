@@ -9,7 +9,7 @@ const ProductList = () => {
   return (
     <StyledProductList>
       {listItens.map((item) => (
-        <ProductCard key={item.id} item={item} />
+        <ProductCard key={item.id} item />
       ))}
     </StyledProductList>
   );
