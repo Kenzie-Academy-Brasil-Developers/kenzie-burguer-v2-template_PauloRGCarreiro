@@ -1,14 +1,23 @@
-import { StyledInputContainer } from '../../../styles/form';
-import { StyledParagraph } from '../../../styles/typography';
+import { StyledInputContainer } from "../../../styles/form";
+import { StyledParagraph } from "../../../styles/typography";
+import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
+import { FieldError } from "react-hook-form";
 
-const Input = ({ id }) => (
-  <div>
-    <StyledInputContainer>
-      <input type='text' id={id} placeholder=' ' />
-      <label htmlFor={id}>Teste</label>
-    </StyledInputContainer>
-    <StyledParagraph fontColor='red'>Erro</StyledParagraph>
-  </div>
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  error?: FieldError;
+}
+
+export const Input = forwardRef(
+  ({ error, ...rest }: IInputProps, ref: ForwardedRef<HTMLInputElement>) => (
+    <div>
+      <StyledInputContainer>
+        <input ref={ref} {...rest} />
+      </StyledInputContainer>
+      <StyledParagraph fontColor="red">
+        {error ? <p>{error.message}</p> : null}
+      </StyledParagraph>
+    </div>
+  )
 );
 
 export default Input;
